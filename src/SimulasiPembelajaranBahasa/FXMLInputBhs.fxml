@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="368.0" prefWidth="461.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="SimulasiPembelajaranBahasa.FXMLInputBhsController">
+   <children>
+      <Label layoutX="121.0" layoutY="49.0" text="Insert/ Update Bahasa">
+         <font>
+            <Font name="Berlin Sans FB" size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="91.0" layoutY="106.0" text="Kode Bahasa">
+         <font>
+            <Font name="Berlin Sans FB" size="18.0" />
+         </font></Label>
+      <Label layoutX="91.0" layoutY="146.0" text="Nama Bahasa">
+         <font>
+            <Font name="Berlin Sans FB" size="18.0" />
+         </font></Label>
+      <TextField fx:id="txtkodebhs" layoutX="225.0" layoutY="104.0" />
+      <TextField fx:id="txtnamabhs" layoutX="225.0" layoutY="144.0" />
+      <TextField fx:id="txtcarabaca" layoutX="225.0" layoutY="189.0" />
+      <Button fx:id="btnsave" layoutX="87.0" layoutY="291.0" mnemonicParsing="false" onAction="#saveclick" prefHeight="26.0" prefWidth="68.0" text="Save" />
+      <Button fx:id="btncancel" layoutX="195.0" layoutY="291.0" mnemonicParsing="false" onAction="#cancelclick" prefHeight="26.0" prefWidth="74.0" text="Cancel" />
+      <Button fx:id="btnexit" layoutX="312.0" layoutY="291.0" mnemonicParsing="false" onAction="#exitclick" prefHeight="26.0" prefWidth="62.0" text="Exit" />
+      <Label layoutX="89.0" layoutY="241.0" text="Gambar">
+         <font>
+            <Font name="Berlin Sans FB" size="18.0" />
+         </font></Label>
+      <TextField fx:id="txtgambar" layoutX="225.0" layoutY="239.0" prefHeight="26.0" prefWidth="90.0" />
+      <Button fx:id="btngambar" layoutX="323.0" layoutY="239.0" mnemonicParsing="false" onAction="#gambarclick" prefHeight="26.0" prefWidth="52.0" text="File" />
+      <Label layoutX="91.0" layoutY="191.0" text="Cara Baca">
+         <font>
+            <Font name="Berlin Sans FB" size="18.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
