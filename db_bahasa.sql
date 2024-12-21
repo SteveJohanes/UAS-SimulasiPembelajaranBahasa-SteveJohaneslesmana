@@ -176,6 +176,21 @@ INSERT INTO `bahasa` (`kodebhs`, `namabhs`, `gambar`, `carabaca`) VALUES
 	('K070', 'pe', 'img/kape.png', 'pe'),
 	('K071', 'po', 'img/kapo.png', 'po');
 
+-- Dumping structure for table db_bahasa.ujian
+DROP TABLE IF EXISTS `ujian`;
+CREATE TABLE IF NOT EXISTS `ujian` (
+  `kodesoal` varchar(3) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
+  `soal` varchar(100) DEFAULT NULL,
+  `jawaban` varchar(50) DEFAULT NULL,
+  `gambar` varchar(50) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Dumping data for table db_bahasa.ujian: ~0 rows (approximately)
+DELETE FROM `ujian`;
+INSERT INTO `ujian` (`kodesoal`, `soal`, `jawaban`, `gambar`) VALUES
+	('S01', 'hiragana apa ini', 'a', 'img\\a_test.jpg'),
+	('S02', 'katakana apa ini', 'ka', 'img\\ka_test.jpg');
+
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
 /*!40014 SET FOREIGN_KEY_CHECKS=IFNULL(@OLD_FOREIGN_KEY_CHECKS, 1) */;
