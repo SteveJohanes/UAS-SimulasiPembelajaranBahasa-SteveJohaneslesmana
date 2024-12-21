@@ -75,7 +75,7 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private void InputBhsClick(ActionEvent event) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("FXMLDataKtn.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("FXMLInputBhs.fxml"));
             Parent root = loader.load();
             Scene scene = new Scene(root);
             Stage stg = new Stage();

@@ -41,43 +41,38 @@ public class FXMLDataKtnController implements Initializable {
     @FXML
     private Button btnnext;
 
-    private UjianModel soal; // Objek soal yang akan digunakan
-    private DBUjian dbUjian; // Objek DBUjian untuk mengambil data soal
-    private Set<String> soalTerkirim = new HashSet<>(); // Set untuk menyimpan kode soal yang sudah ditampilkan
+    private UjianModel soal;
+    private DBUjian dbUjian;
+    private Set<String> soalTerkirim = new HashSet<>();
    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        dbUjian = new DBUjian(); // Inisialisasi DBUjian
+        dbUjian = new DBUjian();
         loadSoal();
     }
 
     private void loadSoal() {
     Connection conn = null;
     try {
-        // Membuat objek koneksi dan membuka koneksi
         Koneksi koneksi = new Koneksi();
         koneksi.bukaKoneksi();
         conn = koneksi.dbKoneksi;
 
-        // Ambil soal secara acak dari database, pastikan soal belum pernah ditampilkan
         String query = "SELECT * FROM ujian WHERE kodesoal NOT IN (SELECT kodesoal FROM ujian WHERE kodesoal IN (?)) ORDER BY RAND() LIMIT 1";
         PreparedStatement pst = conn.prepareStatement(query);
-        pst.setString(1, String.join(",", soalTerkirim)); // Mengirimkan soal yang sudah ditampilkan
+        pst.setString(1, String.join(",", soalTerkirim));
         ResultSet rs = pst.executeQuery();
 
         if (rs.next()) {
-            // Ambil data soal dari result set
             soal = new UjianModel();
             soal.setKodesoal(rs.getString("kodesoal"));
             soal.setSoal(rs.getString("soal"));
             soal.setJawaban(rs.getString("jawaban"));
-            soal.setGambar(rs.getString("gambar")); // Menyimpan path gambar
+            soal.setGambar(rs.getString("gambar"));
 
-            // Set soal ke tampilan
-            lblsoal.setText(soal.getSoal()); // Menampilkan soal pada label
+            lblsoal.setText(soal.getSoal());
             txtjwb.setPromptText(soal.getSoal());
 
-            // Jika ada gambar, tampilkan gambar
             String imagePath = soal.getGambar();
             if (imagePath != null && !imagePath.isEmpty()) {
                 try {
@@ -85,11 +80,10 @@ public class FXMLDataKtnController implements Initializable {
                     imgbhs.setImage(gambar);
                 } catch (FileNotFoundException ex) {
                     Logger.getLogger(FXMLDataKtnController.class.getName()).log(Level.SEVERE, null, ex);
-                    imgbhs.setImage(null); // Jika gambar tidak ditemukan
+                    imgbhs.setImage(null);
                 }
             }
 
-            // Tambahkan kode soal yang sudah ditampilkan ke Set
             soalTerkirim.add(soal.getKodesoal());
         } else {
             showAlert(Alert.AlertType.WARNING, "Semua soal telah ditampilkan!");
@@ -98,7 +92,6 @@ public class FXMLDataKtnController implements Initializable {
         Logger.getLogger(FXMLDataKtnController.class.getName()).log(Level.SEVERE, null, e);
         showAlert(Alert.AlertType.ERROR, "Terjadi kesalahan saat mengambil soal!");
     } finally {
-        // Menutup koneksi setelah operasi selesai
         if (conn != null) {
             new Koneksi().tutupKoneksi();
         }
