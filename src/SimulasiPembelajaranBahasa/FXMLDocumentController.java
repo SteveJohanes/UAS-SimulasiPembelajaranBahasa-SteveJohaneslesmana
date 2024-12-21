@@ -9,6 +9,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -16,8 +17,15 @@ import javafx.stage.Stage;
 public class FXMLDocumentController implements Initializable {
 
     public static DBBhs dtbhs = new DBBhs();
+    public static DBUjian dtujian = new DBUjian();
 
     private Label label;
+    @FXML
+    private Button btnbhs;
+    @FXML
+    private Button btntest;
+    @FXML
+    private Button btninput;
 
     private void handleButtonAction(ActionEvent event) {
         System.out.println("You clicked me!");
@@ -29,37 +37,17 @@ public class FXMLDocumentController implements Initializable {
         // TODO
     }
 
-   
-
-    @FXML
-    private void InputBrgClick(ActionEvent event) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("FXMLInputBhs.fxml"));
-            Parent root = (Parent) loader.load();
-            Scene scene = new Scene(root);
-            Stage stg = new Stage();
-            stg.initModality(Modality.APPLICATION_MODAL);
-            stg.setResizable(false);
-            stg.setIconified(false);
-            stg.setScene(scene);
-            stg.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-
 
     @FXML
     private void DataBhsClick(ActionEvent event) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("FXMLDataBhs.fxml"));
-            Parent root = (Parent) loader.load();
+            Parent root = loader.load();
             Scene scene = new Scene(root);
             Stage stg = new Stage();
             stg.initModality(Modality.APPLICATION_MODAL);
             stg.setResizable(false);
-            stg.setIconified(false);
+            stg.setTitle("Data Bahasa");
             stg.setScene(scene);
             stg.show();
         } catch (IOException e) {
@@ -77,6 +65,23 @@ public class FXMLDocumentController implements Initializable {
             stg.initModality(Modality.APPLICATION_MODAL);
             stg.setResizable(false);
             stg.setIconified(false);
+            stg.setScene(scene);
+            stg.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void InputBhsClick(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("FXMLDataKtn.fxml"));
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+            Stage stg = new Stage();
+            stg.initModality(Modality.APPLICATION_MODAL);
+            stg.setResizable(false);
+            stg.setTitle("Data Kata");
             stg.setScene(scene);
             stg.show();
         } catch (IOException e) {

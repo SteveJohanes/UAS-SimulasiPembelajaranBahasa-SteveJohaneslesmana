@@ -1,117 +1,110 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/javafx/FXMLController.java to edit this template
- */
 package SimulasiPembelajaranBahasa;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javafx.collections.ObservableList;
+import SimulasiPembelajaranBahasa.DBUjian;
+import SimulasiPembelajaranBahasa.Koneksi;
+import SimulasiPembelajaranBahasa.UjianModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseEvent;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
 
-/**
- * FXML Controller class
- *
- * @author HP
- */
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.net.URL;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.HashSet;
+import java.util.ResourceBundle;
+import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.scene.control.Label;
+
 public class FXMLDataKtnController implements Initializable {
 
     @FXML
     private Button btnexit;
     @FXML
-    private Button btnupdate;
-    @FXML
-    private Button btndelete;
-    @FXML
-    private Button btninsert;
-    @FXML
-    private Button btnlast;
-    @FXML
-    private Button btnnext;
-    @FXML
-    private Button btnprev;
-    @FXML
-    private Button btnfirst;
-    @FXML
-    private TableView<BhsModel> tbvbhs;
-    @FXML
     private ImageView imgbhs;
     @FXML
-    private Button btnsearch;
+    private TextField txtjwb;
     @FXML
-    private TextField searchbhs;
+    private Button btncek;
+    @FXML
+    private Label lblsoal;
+    @FXML
+    private Button btnnext;
 
-    /**
-     * Initializes the controller class.
-     */
+    private UjianModel soal; // Objek soal yang akan digunakan
+    private DBUjian dbUjian; // Objek DBUjian untuk mengambil data soal
+    private Set<String> soalTerkirim = new HashSet<>(); // Set untuk menyimpan kode soal yang sudah ditampilkan
+   
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        dbUjian = new DBUjian(); // Inisialisasi DBUjian
+        loadSoal();
     }
 
-    public void showdata() {
-        ObservableList<BhsModel> data = FXMLDocumentController.dtbhs.Load();
-        if (data != null) {
-            tbvbhs.getColumns().clear();
-            tbvbhs.getItems().clear();
+    private void loadSoal() {
+    Connection conn = null;
+    try {
+        // Membuat objek koneksi dan membuka koneksi
+        Koneksi koneksi = new Koneksi();
+        koneksi.bukaKoneksi();
+        conn = koneksi.dbKoneksi;
 
-            TableColumn col = new TableColumn("kodebhs");
-            col.setCellValueFactory(new PropertyValueFactory<BhsModel, String>("kodebhs"));
-            tbvbhs.getColumns().addAll(col);
+        // Ambil soal secara acak dari database, pastikan soal belum pernah ditampilkan
+        String query = "SELECT * FROM ujian WHERE kodesoal NOT IN (SELECT kodesoal FROM ujian WHERE kodesoal IN (?)) ORDER BY RAND() LIMIT 1";
+        PreparedStatement pst = conn.prepareStatement(query);
+        pst.setString(1, String.join(",", soalTerkirim)); // Mengirimkan soal yang sudah ditampilkan
+        ResultSet rs = pst.executeQuery();
 
-            col = new TableColumn("namabhs");
-            col.setCellValueFactory(new PropertyValueFactory<BhsModel, String>("namabhs"));
-            tbvbhs.getColumns().addAll(col);
+        if (rs.next()) {
+            // Ambil data soal dari result set
+            soal = new UjianModel();
+            soal.setKodesoal(rs.getString("kodesoal"));
+            soal.setSoal(rs.getString("soal"));
+            soal.setJawaban(rs.getString("jawaban"));
+            soal.setGambar(rs.getString("gambar")); // Menyimpan path gambar
 
-            col = new TableColumn("carabaca");
-            col.setCellValueFactory(new PropertyValueFactory<BhsModel, String>("carabaca"));
-            tbvbhs.getColumns().addAll(col);
+            // Set soal ke tampilan
+            lblsoal.setText(soal.getSoal()); // Menampilkan soal pada label
+            txtjwb.setPromptText(soal.getSoal());
 
-            col = new TableColumn("jenis");
-            col.setCellValueFactory(new PropertyValueFactory<BhsModel, String>("jenis"));
-            tbvbhs.getColumns().addAll(col);
+            // Jika ada gambar, tampilkan gambar
+            String imagePath = soal.getGambar();
+            if (imagePath != null && !imagePath.isEmpty()) {
+                try {
+                    Image gambar = new Image(new FileInputStream(imagePath));
+                    imgbhs.setImage(gambar);
+                } catch (FileNotFoundException ex) {
+                    Logger.getLogger(FXMLDataKtnController.class.getName()).log(Level.SEVERE, null, ex);
+                    imgbhs.setImage(null); // Jika gambar tidak ditemukan
+                }
+            }
 
-            tbvbhs.setItems(data);
+            // Tambahkan kode soal yang sudah ditampilkan ke Set
+            soalTerkirim.add(soal.getKodesoal());
         } else {
-            Alert a = new Alert(Alert.AlertType.ERROR, "Data kosong", ButtonType.OK);
-            a.showAndWait();
-            tbvbhs.getScene().getWindow().hide();
+            showAlert(Alert.AlertType.WARNING, "Semua soal telah ditampilkan!");
+        }
+    } catch (Exception e) {
+        Logger.getLogger(FXMLDataKtnController.class.getName()).log(Level.SEVERE, null, e);
+        showAlert(Alert.AlertType.ERROR, "Terjadi kesalahan saat mengambil soal!");
+    } finally {
+        // Menutup koneksi setelah operasi selesai
+        if (conn != null) {
+            new Koneksi().tutupKoneksi();
         }
     }
+}
 
-    public void showgambar() {
-        Image gambar = null;
-        try {
-            gambar = new Image(new FileInputStream(tbvbhs.getSelectionModel().getSelectedItem().getGambar()));
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(FXMLDataBhsController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        imgbhs.setImage(gambar);
-    }
 
     @FXML
     private void exitclick(ActionEvent event) {
@@ -119,163 +112,28 @@ public class FXMLDataKtnController implements Initializable {
     }
 
     @FXML
-    private void updateclick(ActionEvent event) {
-        BhsModel s = new BhsModel();
-        s = tbvbhs.getSelectionModel().getSelectedItem();
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("FXMLInputBhs.fxml"));
-            Parent root = (Parent) loader.load();
-            FXMLInputBhsController isidt = (FXMLInputBhsController) loader.getController();
-            isidt.execute(s);
-            Scene scene = new Scene(root);
-            Stage stg = new Stage();
-            stg.initModality(Modality.APPLICATION_MODAL);
-            stg.setResizable(false);
-            stg.setIconified(false);
-            stg.setScene(scene);
-            stg.showAndWait();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        showdata();
-        firstclick(event);
-    }
+    private void cekjawaban(ActionEvent event) {
+        if (soal != null) {
+            String jawabanUser = txtjwb.getText().trim(); // Menghapus spasi ekstra
+            boolean isCorrect = dbUjian.cekJawaban(soal.getKodesoal(), jawabanUser);
 
-    @FXML
-    private void deleteclick(ActionEvent event) {
-        BhsModel s = new BhsModel();
-        s = tbvbhs.getSelectionModel().getSelectedItem();
-        Alert a = new Alert(Alert.AlertType.CONFIRMATION, "Mau dihapus?", ButtonType.YES, ButtonType.NO);
-        a.showAndWait();
-        if (a.getResult() == ButtonType.YES) {
-            if (FXMLDocumentController.dtbhs.delete(s.getKodebhs())) {
-                Alert b = new Alert(Alert.AlertType.INFORMATION, "Data berhasil dihapus", ButtonType.OK);
-                b.showAndWait();
+            if (isCorrect) {
+                showAlert(Alert.AlertType.INFORMATION, "Jawaban benar!");
             } else {
-                Alert b = new Alert(Alert.AlertType.ERROR, "Data gagal dihapus", ButtonType.OK);
-                b.showAndWait();
+                showAlert(Alert.AlertType.ERROR, "Jawaban salah!");
             }
-            showdata();
-            firstclick(event);
+        } else {
+            showAlert(Alert.AlertType.WARNING, "Soal tidak tersedia!");
         }
     }
 
-    @FXML
-    private void insertclick(ActionEvent event) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("FXMLInputBhs.fxml"));
-            Parent root = (Parent) loader.load();
-            Scene scene = new Scene(root);
-            Stage stg = new Stage();
-            stg.initModality(Modality.APPLICATION_MODAL);
-            stg.setResizable(false);
-            stg.setIconified(false);
-            stg.setScene(scene);
-            stg.showAndWait();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        showdata();
-        firstclick(event);
-    }
-
-    @FXML
-    private void lastclick(ActionEvent event) {
-        tbvbhs.getSelectionModel().selectLast();
-        showgambar();
-        tbvbhs.requestFocus();
+    private void showAlert(Alert.AlertType type, String message) {
+        Alert alert = new Alert(type, message, ButtonType.OK);
+        alert.showAndWait();
     }
 
     @FXML
     private void nextclick(ActionEvent event) {
-        tbvbhs.getSelectionModel().selectNext();
-        showgambar();
-        tbvbhs.requestFocus();
+        loadSoal();
     }
-
-    @FXML
-    private void prevclick(ActionEvent event) {
-        tbvbhs.getSelectionModel().selectPrevious();
-        showgambar();
-        tbvbhs.requestFocus();
-    }
-
-    @FXML
-    private void firstclick(ActionEvent event) {
-        tbvbhs.getSelectionModel().selectFirst();
-        showgambar();
-        tbvbhs.requestFocus();
-    }
-
-    @FXML
-    private void tableclick(MouseEvent event) {
-        showgambar();
-    }
-
-    @FXML
-    private void searchclick(ActionEvent event) {
-        BhsModel s = new BhsModel();
-        String key = searchbhs.getText();
-        if (key != "") {
-            ObservableList<BhsModel> data = FXMLDocumentController.dtbhs.CariBhs(key, key);
-            if (data != null) {
-                tbvbhs.getColumns().clear();
-                tbvbhs.getItems().clear();
-                TableColumn col = new TableColumn("kodebhs");
-                col.setCellValueFactory(new PropertyValueFactory<BhsModel, String>("kodebhs"));
-                tbvbhs.getColumns().addAll(col);
-                col = new TableColumn("namabhs");
-
-                col.setCellValueFactory(new PropertyValueFactory<BhsModel, String>("namabhs"));
-                tbvbhs.getColumns().addAll(col);
-
-                col = new TableColumn("jenis");
-                col.setCellValueFactory(new PropertyValueFactory<BhsModel, String>("jenis"));
-                tbvbhs.getColumns().addAll(col);
-
-                col = new TableColumn("gambar");
-                col.setCellValueFactory(new PropertyValueFactory<BhsModel, String>("gambar"));
-                tbvbhs.getColumns().addAll(col);
-                tbvbhs.setItems(data);
-            } else {
-                Alert a = new Alert(Alert.AlertType.ERROR, "Data kosong", ButtonType.OK);
-                a.showAndWait();
-                tbvbhs.getScene().getWindow().hide();;
-            }
-        } else {
-            showdata();
-        }
-    }
-
-    @FXML
-    private void cariData(KeyEvent event) {
-        BhsModel s = new BhsModel();
-        String key = searchbhs.getText();
-        if (key != "") {
-            ObservableList<BhsModel> data = FXMLDocumentController.dtbhs.CariBhs(key, key);
-            if (data != null) {
-                tbvbhs.getColumns().clear();
-                tbvbhs.getItems().clear();
-
-                TableColumn col = new TableColumn("kodebhs");
-                col.setCellValueFactory(new PropertyValueFactory<BhsModel, String>("kodebhs"));
-                tbvbhs.getColumns().addAll(col);
-                col = new TableColumn("namabhs");
-                col.setCellValueFactory(new PropertyValueFactory<BhsModel, String>("namabhs"));
-                tbvbhs.getColumns().addAll(col);
-                col = new TableColumn("tarif");
-                col.setCellValueFactory(new PropertyValueFactory<BhsModel, String>("tarif"));
-                tbvbhs.getColumns().addAll(col);
-
-                tbvbhs.setItems(data);
-            } else {
-                Alert a = new Alert(Alert.AlertType.ERROR, "Data kosong", ButtonType.OK);
-                a.showAndWait();
-                tbvbhs.getScene().getWindow().hide();;
-            }
-        } else {
-            showdata();
-        }
-    }
-
 }

@@ -1,33 +1,61 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Menu?>
-<?import javafx.scene.control.MenuBar?>
-<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.effect.Glow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.RadialGradient?>
+<?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="460.0" prefWidth="531.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="SimulasiPembelajaranBahasa.FXMLDocumentController">
+<AnchorPane id="AnchorPane" prefHeight="598.0" prefWidth="536.0" style="-fx-background-color: white; -fx-border-color: red;" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="SimulasiPembelajaranBahasa.FXMLDocumentController">
    <children>
-      <MenuBar layoutY="2.0" prefHeight="25.0" prefWidth="531.0">
-        <menus>
-          <Menu mnemonicParsing="false" text="Display Data">
-            <items>
-                  <MenuItem mnemonicParsing="false" onAction="#DataBhsClick" text="Hiragana" />
-                  <MenuItem mnemonicParsing="false" onAction="#DataKtnClick" text="Katakana" />
-            </items>
-          </Menu>
-            <Menu mnemonicParsing="false" text="Input Data">
-              <items>
-                  <MenuItem mnemonicParsing="false" onAction="#InputBrgClick" text="Bahasa" />
-              </items>
-            </Menu>
-        </menus>
-      </MenuBar>
-      <Label layoutX="90.0" layoutY="217.0" text="Simulasi Pembelajran Bahasa Jepang">
+      <Label layoutX="87.0" layoutY="260.0" text="Simulasi Pembelajaran Bahasa Jepang" textAlignment="CENTER">
          <font>
             <Font name="Century751 SeBd BT Semi Bold" size="20.0" />
          </font>
+         <textFill>
+            <RadialGradient centerX="0.17699116310187146" centerY="0.5719696825200861" focusAngle="-15.46" focusDistance="-1.0" radius="0.6743119791013386">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="0.9473684430122375" green="0.07719298452138901" blue="0.07719298452138901" />
+                     </color>
+                  </Stop>
+               </stops>
+            </RadialGradient>
+         </textFill>
+         <effect>
+            <Glow level="0.51" />
+         </effect>
       </Label>
+      <ImageView blendMode="MULTIPLY" fitHeight="260.0" fitWidth="330.0" layoutX="112.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@img/Screenshot_1.jpg" />
+         </image>
+      </ImageView>
+      <Button fx:id="btnbhs" layoutX="206.0" layoutY="352.0" mnemonicParsing="false" onAction="#DataBhsClick" prefHeight="46.0" prefWidth="118.0" style="-fx-background-color: white; -fx-border-color: red;" text="Belajar" textFill="RED">
+         <font>
+            <Font name="Geometr415 Blk BT Black" size="18.0" />
+         </font>
+      </Button>
+      <Button fx:id="btntest" layoutX="206.0" layoutY="420.0" mnemonicParsing="false" onAction="#DataKtnClick" prefHeight="46.0" prefWidth="118.0" style="-fx-background-color: white; -fx-border-color: green;" text="Test" textFill="#00ff4d">
+         <font>
+            <Font name="Geometr415 Blk BT Black" size="18.0" />
+         </font>
+      </Button>
+      <Button fx:id="btninput" layoutX="206.0" layoutY="492.0" mnemonicParsing="false" onAction="#InputBhsClick" prefHeight="46.0" prefWidth="118.0" style="-fx-background-color: white; -fx-border-color: blue;" text="Input data" textFill="#005fff">
+         <font>
+            <Font name="Geometr415 Blk BT Black" size="18.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

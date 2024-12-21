@@ -10,28 +10,28 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="663.0" prefWidth="871.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="SimulasiPembelajaranBahasa.FXMLDataBhsController">
+<AnchorPane id="AnchorPane" prefHeight="663.0" prefWidth="871.0" style="-fx-background-color: white; -fx-border-color: red;" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="SimulasiPembelajaranBahasa.FXMLDataBhsController">
    <children>
-      <Button fx:id="btnexit" layoutX="604.0" layoutY="559.0" mnemonicParsing="false" onAction="#exitclick" prefHeight="26.0" prefWidth="80.0" text="Exit" />
-      <Button fx:id="btnupdate" layoutX="479.0" layoutY="559.0" mnemonicParsing="false" onAction="#updateclick" prefHeight="26.0" prefWidth="80.0" text="Update" />
-      <Button fx:id="btndelete" layoutX="320.0" layoutY="559.0" mnemonicParsing="false" onAction="#deleteclick" prefHeight="26.0" prefWidth="80.0" text="Delete" />
-      <Button fx:id="btninsert" layoutX="188.0" layoutY="559.0" mnemonicParsing="false" onAction="#insertclick" prefHeight="26.0" prefWidth="80.0" text="Insert" />
-      <Button fx:id="btnlast" layoutX="603.0" layoutY="517.0" mnemonicParsing="false" onAction="#lastclick" prefHeight="26.0" prefWidth="80.0" text="Last" />
-      <Button fx:id="btnnext" layoutX="479.0" layoutY="517.0" mnemonicParsing="false" onAction="#nextclick" prefHeight="26.0" prefWidth="80.0" text="Next" />
-      <Button fx:id="btnprev" layoutX="320.0" layoutY="517.0" mnemonicParsing="false" onAction="#prevclick" prefHeight="26.0" prefWidth="80.0" text="Prev" />
-      <Button fx:id="btnfirst" layoutX="188.0" layoutY="517.0" mnemonicParsing="false" onAction="#firstclick" prefHeight="26.0" prefWidth="80.0" text="First" />
+      <Button fx:id="btnexit" layoutX="392.0" layoutY="545.0" mnemonicParsing="false" onAction="#exitclick" prefHeight="26.0" prefWidth="80.0" style="-fx-background-color: white; -fx-border-color: red;" text="Exit" />
+      <Button fx:id="btnupdate" layoutX="286.0" layoutY="545.0" mnemonicParsing="false" onAction="#updateclick" prefHeight="26.0" prefWidth="80.0" style="-fx-background-color: white; -fx-border-color: red;" text="Update" />
+      <Button fx:id="btndelete" layoutX="180.0" layoutY="545.0" mnemonicParsing="false" onAction="#deleteclick" prefHeight="26.0" prefWidth="80.0" style="-fx-background-color: white; -fx-border-color: red;" text="Delete" />
+      <Button fx:id="btninsert" layoutX="74.0" layoutY="545.0" mnemonicParsing="false" onAction="#insertclick" prefHeight="26.0" prefWidth="80.0" style="-fx-background-color: white; -fx-border-color: red;" text="Insert" />
+      <Button fx:id="btnlast" layoutX="391.0" layoutY="503.0" mnemonicParsing="false" onAction="#lastclick" prefHeight="26.0" prefWidth="80.0" style="-fx-background-color: white; -fx-border-color: red;" text="Last" />
+      <Button fx:id="btnnext" layoutX="286.0" layoutY="503.0" mnemonicParsing="false" onAction="#nextclick" prefHeight="26.0" prefWidth="80.0" style="-fx-background-color: white; -fx-border-color: red;" text="Next" />
+      <Button fx:id="btnprev" layoutX="180.0" layoutY="503.0" mnemonicParsing="false" onAction="#prevclick" prefHeight="26.0" prefWidth="80.0" style="-fx-background-color: white; -fx-border-color: red;" text="Prev" />
+      <Button fx:id="btnfirst" layoutX="74.0" layoutY="503.0" mnemonicParsing="false" onAction="#firstclick" prefHeight="26.0" prefWidth="80.0" style="-fx-background-color: white; -fx-border-color: red;" text="First" />
       <TableView fx:id="tbvbhs" layoutX="25.0" layoutY="132.0" onMouseClicked="#tableclick" prefHeight="344.0" prefWidth="496.0">
          <columns>
             <TableColumn prefWidth="75.0" text="C1" />
             <TableColumn prefWidth="75.0" text="C2" />
          </columns>
       </TableView>
-      <Label layoutX="25.0" layoutY="89.0" text="Data Hiragana">
+      <Label layoutX="26.0" layoutY="65.0" text="Data Bahasa" textFill="RED">
          <font>
-            <Font name="Berlin Sans FB Bold" size="24.0" />
+            <Font name="Viner Hand ITC" size="24.0" />
          </font></Label>
       <ImageView fx:id="imgbhs" fitHeight="321.0" fitWidth="308.0" layoutX="539.0" layoutY="155.0" pickOnBounds="true" preserveRatio="true" />
-      <Button fx:id="btnsearch" layoutX="480.0" layoutY="90.0" mnemonicParsing="false" onAction="#searchclick" prefHeight="13.0" prefWidth="13.0">
+      <Button fx:id="btnsearch" layoutX="480.0" layoutY="77.0" mnemonicParsing="false" onAction="#searchclick" prefHeight="13.0" prefWidth="13.0" style="-fx-background-color: white; -fx-border-color: red;">
          <graphic>
             <ImageView fitHeight="22.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -39,6 +39,6 @@
                </image>
             </ImageView>
          </graphic></Button>
-      <TextField fx:id="searchbhs" layoutX="321.0" layoutY="90.0" onKeyPressed="#cariData" prefHeight="30.0" prefWidth="150.0" promptText="Search by kode" />
+      <TextField fx:id="searchbhs" layoutX="321.0" layoutY="77.0" onKeyPressed="#cariData" prefHeight="30.0" prefWidth="150.0" promptText="Search by kode" style="-fx-background-color: white; -fx-border-color: red;" />
    </children>
 </AnchorPane>

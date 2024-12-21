@@ -3,13 +3,16 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/DATA%20STEVE/KULIAH/SEMESTER%205/PBOL/UTS/SimulasiPenjualanBahasa/src/SimulasiPembelajaranBahasa/BhsModel.java</file>
-            <file>file:/D:/DATA%20STEVE/KULIAH/SEMESTER%205/PBOL/UTS/SimulasiPenjualanBahasa/src/SimulasiPembelajaranBahasa/FXMLDataBhsController.java</file>
-            <file>file:/D:/DATA%20STEVE/KULIAH/SEMESTER%205/PBOL/UTS/SimulasiPenjualanBahasa/src/SimulasiPembelajaranBahasa/DBBhs.java</file>
-            <file>file:/D:/DATA%20STEVE/KULIAH/SEMESTER%205/PBOL/UTS/SimulasiPenjualanBahasa/src/SimulasiPembelajaranBahasa/Koneksi.java</file>
-            <file>file:/D:/DATA%20STEVE/KULIAH/SEMESTER%205/PBOL/UTS/SimulasiPenjualanBahasa/src/SimulasiPembelajaranBahasa/FXMLDataKtn.fxml</file>
-            <file>file:/D:/DATA%20STEVE/KULIAH/SEMESTER%205/PBOL/UTS/SimulasiPenjualanBahasa/src/SimulasiPembelajaranBahasa/FXMLDocumentController.java</file>
-            <file>file:/D:/DATA%20STEVE/KULIAH/SEMESTER%205/PBOL/UTS/SimulasiPenjualanBahasa/src/SimulasiPembelajaranBahasa/FXMLDataKtnController.java</file>
+            <file>file:/D:/KULIAH/SEMESTER%205/PBOL/UTS/SimulasiPenjualanBahasa/src/SimulasiPembelajaranBahasa/FXMLDocumentController.java</file>
+            <file>file:/D:/KULIAH/SEMESTER%205/PBOL/UTS/SimulasiPenjualanBahasa/src/SimulasiPembelajaranBahasa/UjianModel.java</file>
+            <file>file:/D:/KULIAH/SEMESTER%205/PBOL/UTS/SimulasiPenjualanBahasa/src/SimulasiPembelajaranBahasa/SimulasiPembelajaranBahasa.java</file>
+            <file>file:/D:/KULIAH/SEMESTER%205/PBOL/UTS/SimulasiPenjualanBahasa/src/SimulasiPembelajaranBahasa/FXMLDataBhsController.java</file>
+            <file>file:/D:/KULIAH/SEMESTER%205/PBOL/UTS/SimulasiPenjualanBahasa/src/SimulasiPembelajaranBahasa/DBBhs.java</file>
+            <file>file:/D:/KULIAH/SEMESTER%205/PBOL/UTS/SimulasiPenjualanBahasa/src/SimulasiPembelajaranBahasa/DBUjian.java</file>
+            <file>file:/D:/KULIAH/SEMESTER%205/PBOL/UTS/SimulasiPenjualanBahasa/src/SimulasiPembelajaranBahasa/FXMLDataKtnController.java</file>
+            <file>file:/D:/KULIAH/SEMESTER%205/PBOL/UTS/SimulasiPenjualanBahasa/src/SimulasiPembelajaranBahasa/FXMLInputBhsController.java</file>
+            <file>file:/D:/KULIAH/SEMESTER%205/PBOL/UTS/SimulasiPenjualanBahasa/src/SimulasiPembelajaranBahasa/BhsModel.java</file>
+            <file>file:/D:/KULIAH/SEMESTER%205/PBOL/UTS/SimulasiPenjualanBahasa/src/SimulasiPembelajaranBahasa/Koneksi.java</file>
         </group>
     </open-files>
 </project-private>

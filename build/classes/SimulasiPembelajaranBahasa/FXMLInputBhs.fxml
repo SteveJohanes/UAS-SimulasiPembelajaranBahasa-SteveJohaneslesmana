@@ -6,11 +6,11 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="368.0" prefWidth="461.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="SimulasiPembelajaranBahasa.FXMLInputBhsController">
+<AnchorPane id="AnchorPane" prefHeight="368.0" prefWidth="461.0" style="-fx-background-color: white; -fx-border-color: red;" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="SimulasiPembelajaranBahasa.FXMLInputBhsController">
    <children>
-      <Label layoutX="121.0" layoutY="49.0" text="Insert/ Update Bahasa">
+      <Label layoutX="137.0" layoutY="32.0" text="Insert/ Update Bahasa" textFill="#f40202">
          <font>
-            <Font name="Berlin Sans FB" size="24.0" />
+            <Font name="Viner Hand ITC" size="18.0" />
          </font>
       </Label>
       <Label layoutX="91.0" layoutY="106.0" text="Kode Bahasa">
@@ -21,18 +21,27 @@
          <font>
             <Font name="Berlin Sans FB" size="18.0" />
          </font></Label>
-      <TextField fx:id="txtkodebhs" layoutX="225.0" layoutY="104.0" />
-      <TextField fx:id="txtnamabhs" layoutX="225.0" layoutY="144.0" />
-      <TextField fx:id="txtcarabaca" layoutX="225.0" layoutY="189.0" />
-      <Button fx:id="btnsave" layoutX="87.0" layoutY="291.0" mnemonicParsing="false" onAction="#saveclick" prefHeight="26.0" prefWidth="68.0" text="Save" />
-      <Button fx:id="btncancel" layoutX="195.0" layoutY="291.0" mnemonicParsing="false" onAction="#cancelclick" prefHeight="26.0" prefWidth="74.0" text="Cancel" />
-      <Button fx:id="btnexit" layoutX="312.0" layoutY="291.0" mnemonicParsing="false" onAction="#exitclick" prefHeight="26.0" prefWidth="62.0" text="Exit" />
+      <TextField fx:id="txtkodebhs" layoutX="225.0" layoutY="104.0" style="-fx-background-color: white; -fx-border-color: red;" />
+      <TextField fx:id="txtnamabhs" layoutX="225.0" layoutY="144.0" style="-fx-background-color: white; -fx-border-color: red;" />
+      <TextField fx:id="txtcarabaca" layoutX="225.0" layoutY="189.0" style="-fx-background-color: white; -fx-border-color: red;" />
+      <Button fx:id="btnsave" layoutX="87.0" layoutY="315.0" mnemonicParsing="false" onAction="#saveclick" pickOnBounds="false" prefHeight="26.0" prefWidth="68.0" style="-fx-background-color: white; -fx-border-color: green;" text="Save" textFill="#77b97a">
+         <font>
+            <Font name="Yu Gothic UI Semibold" size="13.0" />
+         </font></Button>
+      <Button fx:id="btncancel" cancelButton="true" layoutX="195.0" layoutY="315.0" mnemonicParsing="false" onAction="#cancelclick" prefHeight="26.0" prefWidth="74.0" style="-fx-background-color: white; -fx-border-color: red;" text="Cancel" textFill="#ff0404">
+         <font>
+            <Font name="Yu Gothic UI Semibold" size="13.0" />
+         </font></Button>
+      <Button fx:id="btnexit" layoutX="312.0" layoutY="315.0" mnemonicParsing="false" onAction="#exitclick" prefHeight="26.0" prefWidth="62.0" style="-fx-background-color: white; -fx-border-color: black;" text="Exit">
+         <font>
+            <Font name="Yu Gothic UI Semibold" size="13.0" />
+         </font></Button>
       <Label layoutX="89.0" layoutY="241.0" text="Gambar">
          <font>
             <Font name="Berlin Sans FB" size="18.0" />
          </font></Label>
-      <TextField fx:id="txtgambar" layoutX="225.0" layoutY="239.0" prefHeight="26.0" prefWidth="90.0" />
-      <Button fx:id="btngambar" layoutX="323.0" layoutY="239.0" mnemonicParsing="false" onAction="#gambarclick" prefHeight="26.0" prefWidth="52.0" text="File" />
+      <TextField fx:id="txtgambar" layoutX="225.0" layoutY="239.0" prefHeight="26.0" prefWidth="90.0" style="-fx-background-color: white; -fx-border-color: red;" />
+      <Button fx:id="btngambar" layoutX="323.0" layoutY="239.0" mnemonicParsing="false" onAction="#gambarclick" prefHeight="26.0" prefWidth="52.0" style="-fx-background-color: white; -fx-border-color: red;" text="File" />
       <Label layoutX="91.0" layoutY="191.0" text="Cara Baca">
          <font>
             <Font name="Berlin Sans FB" size="18.0" />
